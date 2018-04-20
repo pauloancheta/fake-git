@@ -1,7 +1,7 @@
 require "fake/git/version"
 
-module Fake
-  module Git
-    # Your code goes here...
+module Fake::Git
+  def self.call(*args)
+    puts "hello world"
   end
 end
