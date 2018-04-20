@@ -1,17 +1,26 @@
 require "fake/git/version"
-# require "fake/git/hash_object"
+
+require_relative "git/hash_object"
 
 HELP = """
-something here
+WELCOME TO FAKEGIT
+
+usage:
+$> echo 'hello world' | fakegit hash-object
 """
 
 module Fake::Git
   def self.call(*args)
-    cmd, sub_cmd = args
-    return HELP if cmd.nil?
+    cmd, sub_cmd = args.first
 
-    classified_cmd = cmd.split("_").map(&:capitalize).join
+    if cmd.nil?
+      puts HELP
+      return
+    end
 
-    send "Fake::Git::#{classified_cmd}.call(#{sub_cmd})"
+
+    classified_cmd = cmd.split("-").map(&:capitalize).join
+
+    const_get("#{classified_cmd}").call(sub_cmd)
   end
 end

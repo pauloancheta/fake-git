@@ -1,5 +1,6 @@
 class Fake::Git::HashObject
   def self.call(*args)
-    puts "hello hash object"
+    puts args
+    args
   end
 end
