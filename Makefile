@@ -5,3 +5,5 @@ install:
 clean:
 	gem uninstall fake-git && \
 	rm fake-git-0.1.0.gem
+
+reset: clean install
