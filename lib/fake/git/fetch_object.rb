@@ -13,7 +13,7 @@ class Fake::Git::FetchObject
     content = File.read(path)
     attributes = Hash.new
 
-    content.split("\n").each do |c|
+    content.split(",").each do |c|
       key, val = c.split("=")
       attributes[key.to_sym] = val
     end
@@ -22,6 +22,7 @@ class Fake::Git::FetchObject
       type: attributes.fetch(:type),
       content: attributes.fetch(:content),
       index: attributes.fetch(:index),
+      file_name: attributes[:file_name],
       path: path
     )
   end
