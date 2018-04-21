@@ -25,6 +25,6 @@ module Fake::Git
               cmd.capitalize
             end
 
-    const_get("#{klass}").call(sub_cmd)
+    const_get("#{klass}").new.call(sub_cmd)
   end
 end

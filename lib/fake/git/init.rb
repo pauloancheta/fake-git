@@ -1,5 +1,5 @@
 class Init
-  def self.call(*args)
+  def call(*args)
     new_folder = "#{args.first}/" if !!args
     `mkdir -p #{new_folder}.fakegit/objects/`
 
