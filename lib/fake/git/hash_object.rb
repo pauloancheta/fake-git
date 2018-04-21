@@ -12,6 +12,7 @@ class Fake::Git::HashObject
     )
 
     write(obj)
+    puts obj.index
     obj
   end
 
@@ -27,6 +28,10 @@ class Fake::Git::HashObject
 
   def write_new_index(obj)
     path = "#{OBJ_PATH}/#{obj.index[0..1]}/#{obj.index[2..-1]}"
-    File.open(path, 'w') { |file| file.write(obj.content) }
+    File.open(path, 'w') do |file|
+      file.write("index=#{obj.index}\n")
+      file.write("type=#{obj.type}\n")
+      file.write("content=#{obj.content}")
+    end
   end
 end
