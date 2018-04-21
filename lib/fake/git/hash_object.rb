@@ -4,21 +4,22 @@ class Fake::Git::HashObject
 
   def call(*args)
     hex = Digest::SHA1.hexdigest args.first
-    write(hex)
-    hex
+    write(hex, args)
+    puts hex
   end
 
   private
-  def write(hex)
+  def write(hex, blob)
     write_top_index(hex)
-    write_new_index(hex)
+    write_new_index(hex, blob)
   end
 
   def write_top_index(hex)
-    `mkdir #{OBJ_PATH}/#{hex[0..1]}`
+    `mkdir -p #{OBJ_PATH}/#{hex[0..1]}`
   end
 
-  def write_new_index(hex)
-    `echo #{args.first} > #{OBJ_PATH}/#{hex[0..1]}/#{hex[2..-1]}`
+  def write_new_index(hex, blob)
+    path = "#{OBJ_PATH}/#{hex[0..1]}/#{hex[2..-1]}"
+    File.open(path, 'w') { |file| file.write(blob.join) }
   end
 end
