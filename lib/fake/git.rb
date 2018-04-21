@@ -19,12 +19,7 @@ module Fake::Git
       return
     end
 
-    klass = if cmd.is_a? Array
-              cmd.first.split("-").map(&:capitalize).join
-            else
-              cmd.capitalize
-            end
-
+    klass = cmd.split("-").map(&:capitalize).join
     const_get("#{klass}").new.call(sub_cmd)
   end
 end
