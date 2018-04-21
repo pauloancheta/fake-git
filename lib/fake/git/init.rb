@@ -1,6 +1,7 @@
 class Init
   def call(*args)
-    new_folder = "#{args.first}/" if !!args
+    new_folder = "#{args.first}/" if args.nil? || args.empty?
+
     `mkdir -p #{new_folder}.fakegit/objects/`
 
     base_folder = !!new_folder ? new_folder : "fakegit"
