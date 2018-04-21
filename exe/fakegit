@@ -1,5 +1,31 @@
 #!/usr/bin/env ruby
 
 require "fake/git"
+require "optparse"
 
-Fake::Git.call(ARGV)
+# Parse options
+options = Hash.new
+OptionParser.new do |opts|
+  opts.set_banner "Welcome to FakeGit"
+  opts.on("--stdin", "Get output from stdin") do
+    options[:stdin] = true
+  end
+end.parse!
+
+# begin exe
+
+cmd = ARGV.first
+return Fake::Git.call(cmd) if cmd.nil? || !options[:stdin]
+
+# with stdin
+while input = STDIN.gets
+  input.each_line do |line|
+    begin
+      full_cmd = [cmd, line].flatten
+
+      Fake::Git.call( full_cmd )
+    rescue Errno::EPIPE
+      exit(74)
+    end
+  end
+end
