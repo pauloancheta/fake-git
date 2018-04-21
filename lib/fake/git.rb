@@ -1,6 +1,7 @@
 require "fake/git/version"
 
 require_relative "git/hash_object"
+require_relative "git/cat_file"
 require_relative "git/init"
 
 HELP = """
