@@ -4,22 +4,26 @@ require "fake/git"
 require "optparse"
 
 # Parse options
-options = Hash.new
+$OPTIONS = Hash.new
 OptionParser.new do |opts|
   opts.set_banner "Welcome to FakeGit"
   opts.on("--stdin", "Get output from stdin") do
-    options[:stdin] = true
+    $OPTIONS[:stdin] = true
   end
 
   opts.on("-w", "Introduce writeable") do
-    options[:stdin] = true
+    $OPTIONS[:stdin] = true
   end
+
+  opts.on("-s", "silence -s from catfile") { $OPTIONS[:cat_file_size] = true }
+  opts.on("-p", "silence -s from catfile") { $OPTIONS[:cat_file_print] = true }
+  opts.on("-t", "silence -s from catfile") { $OPTIONS[:cat_file_type] = true }
 end.parse!
 
 # begin exe
 
 cmd, _ = ARGV
-if cmd.nil? || !options[:stdin]
+if cmd.nil? || !$OPTIONS[:stdin]
   Fake::Git.call(ARGV)
   return
 end
