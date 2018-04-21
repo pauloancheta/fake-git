@@ -6,6 +6,7 @@ require_relative "git/init"
 require_relative "git/fetch_object"
 require_relative "git/update_index"
 require_relative "git/write_tree"
+require_relative "git/commit_tree"
 
 require_relative "git/priv/object"
 
