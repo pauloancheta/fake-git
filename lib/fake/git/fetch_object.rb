@@ -4,7 +4,8 @@ class Fake::Git::FetchObject
   OBJ_PATH = ".fakegit/objects"
 
   def call(*args)
-    path = file_path(args.first)
+    index, _ = args.first.split(" ")
+    path = file_path(index)
     build_obj(path)
   end
 

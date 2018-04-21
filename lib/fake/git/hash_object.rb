@@ -2,7 +2,6 @@ require 'digest'
 require_relative 'priv/object'
 
 class Fake::Git::HashObject
-  OBJ_PATH = ".fakegit/objects"
 
   def call(*args)
     obj = Fake::Git::Priv::Object.new(
@@ -11,27 +10,7 @@ class Fake::Git::HashObject
       index: Digest::SHA1.hexdigest(args.first)
     )
 
-    write(obj)
-    puts obj.index
+    obj.write!
     obj
-  end
-
-  private
-  def write(obj)
-    write_top_index(obj)
-    write_new_index(obj)
-  end
-
-  def write_top_index(obj)
-    `mkdir -p #{OBJ_PATH}/#{obj.index[0..1]}`
-  end
-
-  def write_new_index(obj)
-    path = "#{OBJ_PATH}/#{obj.index[0..1]}/#{obj.index[2..-1]}"
-    File.open(path, 'w') do |file|
-      file.write("index=#{obj.index},")
-      file.write("type=#{obj.type},")
-      file.write("content=#{obj.content},")
-    end
   end
 end

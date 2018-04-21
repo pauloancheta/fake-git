@@ -21,6 +21,8 @@ OptionParser.new do |opts|
 
   opts.on("--add", "silence option for update-index") { $OPTIONS[:update_index_add] = true }
   opts.on("--cache-info", "get file info for object") { |v| $OPTIONS[:update_index_cache_info] = v }
+
+  opts.on("-m", "--message [message]", "commit message") { |msg| $OPTIONS[:commit_message] = msg }
 end.parse!
 
 # begin exe
