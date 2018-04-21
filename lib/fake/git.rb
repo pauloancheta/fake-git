@@ -4,6 +4,7 @@ require_relative "git/hash_object"
 require_relative "git/cat_file"
 require_relative "git/init"
 require_relative "git/fetch_object"
+require_relative "git/update_index"
 
 require_relative "git/priv/object"
 
@@ -16,12 +17,14 @@ $> echo 'hello world' | fakegit hash-object
 
 module Fake::Git
   def self.call(*args)
-    cmd, sub_cmd = args.flatten
+    cmd, _ = args.flatten
 
     if cmd.nil?
       puts HELP
       return
     end
+
+    sub_cmd = args.flatten[1..-1].join(" ")
 
     klass = cmd.split("-").map(&:capitalize).join
     const_get("#{klass}").new.call(sub_cmd)

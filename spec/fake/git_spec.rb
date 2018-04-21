@@ -5,7 +5,7 @@ RSpec.describe Fake::Git do
 
   it "does something useful" do
     hash_object = Fake::Git.call(["hash-object", "hello"])
-    expect(hash_object).to eq("hello")
+    expect(hash_object.class).to eq Fake::Git::Priv::Object
   end
 
   it "returns the help message when cmd is not present" do

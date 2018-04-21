@@ -15,9 +15,12 @@ OptionParser.new do |opts|
     $OPTIONS[:stdin] = true
   end
 
-  opts.on("-s", "silence -s from catfile") { $OPTIONS[:cat_file_size] = true }
-  opts.on("-p", "silence -s from catfile") { $OPTIONS[:cat_file_print] = true }
-  opts.on("-t", "silence -s from catfile") { $OPTIONS[:cat_file_type] = true }
+  opts.on("-s", "get size for catfile") { $OPTIONS[:cat_file_size] = true }
+  opts.on("-p", "print for catfile") { $OPTIONS[:cat_file_print] = true }
+  opts.on("-t", "type for catfile") { $OPTIONS[:cat_file_type] = true }
+
+  opts.on("--add", "silence option for update-index") { $OPTIONS[:update_index_add] = true }
+  opts.on("--cache-info", "get file info for object") { |v| $OPTIONS[:update_index_cache_info] = v }
 end.parse!
 
 # begin exe
