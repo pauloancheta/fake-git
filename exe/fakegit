@@ -10,12 +10,19 @@ OptionParser.new do |opts|
   opts.on("--stdin", "Get output from stdin") do
     options[:stdin] = true
   end
+
+  opts.on("-w", "Introduce writeable") do
+    options[:stdin] = true
+  end
 end.parse!
 
 # begin exe
 
-cmd = ARGV.first
-return Fake::Git.call(cmd) if cmd.nil? || !options[:stdin]
+cmd, _ = ARGV
+if cmd.nil? || !options[:stdin]
+  Fake::Git.call(ARGV)
+  return
+end
 
 # with stdin
 while input = STDIN.gets
