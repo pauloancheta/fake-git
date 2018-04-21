@@ -1,25 +1,32 @@
 require 'digest'
+require_relative 'priv/object'
+
 class Fake::Git::HashObject
   OBJ_PATH = ".fakegit/objects"
 
   def call(*args)
-    hex = Digest::SHA1.hexdigest args.first
-    write(hex, args)
-    puts hex
+    obj = Fake::Git::Priv::Object.new(
+      type: "blob",
+      content: args.first,
+      index: Digest::SHA1.hexdigest(args.first)
+    )
+
+    write(obj)
+    obj
   end
 
   private
-  def write(hex, blob)
-    write_top_index(hex)
-    write_new_index(hex, blob)
+  def write(obj)
+    write_top_index(obj)
+    write_new_index(obj)
   end
 
-  def write_top_index(hex)
-    `mkdir -p #{OBJ_PATH}/#{hex[0..1]}`
+  def write_top_index(obj)
+    `mkdir -p #{OBJ_PATH}/#{obj.index[0..1]}`
   end
 
-  def write_new_index(hex, blob)
-    path = "#{OBJ_PATH}/#{hex[0..1]}/#{hex[2..-1]}"
-    File.open(path, 'w') { |file| file.write(blob.join) }
+  def write_new_index(obj)
+    path = "#{OBJ_PATH}/#{obj.index[0..1]}/#{obj.index[2..-1]}"
+    File.open(path, 'w') { |file| file.write(obj.content) }
   end
 end
