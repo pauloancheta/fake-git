@@ -2,14 +2,14 @@ require_relative 'fetch_object'
 require_relative 'update_ref'
 require 'digest'
 
-class Fake::Git::CommitTree
+class FakeGit::CommitTree
   def call(*args)
     # make sure that the object exists
-    obj = Fake::Git::FetchObject.new.call(args.first)
+    obj = FakeGit::FetchObject.new.call(args.first)
 
     raise TypeError.new("#{args.first} is not a tree") if obj.type != "tree"
 
-    commit = Fake::Git::Priv::Object.new(
+    commit = FakeGit::Priv::Object.new(
       type: "commit",
       message: $OPTIONS[:commit_message],
       tree: obj.index,
@@ -17,7 +17,7 @@ class Fake::Git::CommitTree
     )
 
     commit.write!
-    Fake::Git::UpdateRef.new.call(commit.index)
+    FakeGit::UpdateRef.new.call(commit.index)
   end
 
   class TypeError < StandardError; end

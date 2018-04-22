@@ -1,6 +1,6 @@
 require_relative "list_objects"
 
-class Fake::Git::Log
+class FakeGit::Log
   def call(*args)
     commit_objects.each do |obj|
       logger(obj)
@@ -9,7 +9,7 @@ class Fake::Git::Log
 
   private
   def commit_objects
-    Fake::Git::ListObjects.new.call.select do |obj|
+    FakeGit::ListObjects.new.call.select do |obj|
       obj.type == "commit"
     end.sort { |a, b| a.date <=> b.date }
   end

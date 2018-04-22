@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fake-git (0.1.0)
+    fake_git (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -27,7 +27,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
-  fake-git!
+  fake_git!
   rake (~> 10.0)
   rspec (~> 3.0)
 

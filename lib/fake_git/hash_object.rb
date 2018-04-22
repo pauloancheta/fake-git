@@ -1,9 +1,9 @@
 require 'digest'
 require_relative 'priv/object'
 
-class Fake::Git::HashObject
+class FakeGit::HashObject
   def call(*args)
-    obj = Fake::Git::Priv::Object.new(
+    obj = FakeGit::Priv::Object.new(
       type: "blob",
       content: args.first,
       index: Digest::SHA1.hexdigest(args.first)

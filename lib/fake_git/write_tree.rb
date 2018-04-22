@@ -1,9 +1,9 @@
 require 'digest'
 
-class Fake::Git::WriteTree
+class FakeGit::WriteTree
   OBJ_PATH = ".fakegit/objects"
   def call(*args)
-    obj = Fake::Git::Priv::Object.new(
+    obj = FakeGit::Priv::Object.new(
       type: "tree",
       content: tree,
       index: Digest::SHA1.hexdigest(tree)

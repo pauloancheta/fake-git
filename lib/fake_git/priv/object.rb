@@ -1,4 +1,4 @@
-module Fake::Git::Priv
+module FakeGit::Priv
   class Object
     ALLOWED_TYPES = ["blob", "tree", "commit", "tag", nil]
     OBJ_PATH = ".fakegit/objects"

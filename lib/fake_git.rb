@@ -20,7 +20,7 @@ usage:
 $> echo 'hello world' | fakegit hash-object
 """
 
-module Fake::Git
+module FakeGit
   def self.call(*args)
     cmds = args.flatten
 

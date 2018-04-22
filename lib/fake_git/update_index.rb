@@ -3,12 +3,12 @@
 require_relative 'priv/object'
 require_relative 'fetch_object'
 
-class Fake::Git::UpdateIndex
+class FakeGit::UpdateIndex
   def call(*args)
     get_obj_type $OPTIONS[:update_index_cache_info]
     index, file_name = args.first.split(" ")
 
-    obj = Fake::Git::FetchObject.new.call(index)
+    obj = FakeGit::FetchObject.new.call(index)
     update_filename(obj, file_name)
   end
 

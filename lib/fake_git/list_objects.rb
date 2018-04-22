@@ -1,12 +1,12 @@
 require_relative "fetch_object"
 
-class Fake::Git::ListObjects
+class FakeGit::ListObjects
   def call(*args)
     collection = []
     file_names.each do |file|
       pruned = file.gsub(".fakegit/objects/", "")
       index = pruned.split("/").join
-      collection << Fake::Git::FetchObject.new.call(index)
+      collection << FakeGit::FetchObject.new.call(index)
     end
 
     collection

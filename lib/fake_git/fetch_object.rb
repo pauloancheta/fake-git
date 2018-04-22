@@ -1,6 +1,6 @@
 require_relative 'priv/object'
 
-class Fake::Git::FetchObject
+class FakeGit::FetchObject
   OBJ_PATH = ".fakegit/objects"
 
   def call(*args)
@@ -19,7 +19,7 @@ class Fake::Git::FetchObject
       attributes[key.to_sym] = val
     end
 
-    Fake::Git::Priv::Object.new(
+    FakeGit::Priv::Object.new(
       attributes.merge(path: path)
     )
   end

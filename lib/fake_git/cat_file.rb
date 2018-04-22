@@ -1,9 +1,9 @@
 require_relative 'priv/object'
 require_relative 'fetch_object'
 
-class Fake::Git::CatFile
+class FakeGit::CatFile
   def call(*args)
-    obj = Fake::Git::FetchObject.new.call(args.first)
+    obj = FakeGit::FetchObject.new.call(args.first)
 
     return file_size(obj) if $OPTIONS[:cat_file_size]
     return file_print(obj) if $OPTIONS[:cat_file_print]

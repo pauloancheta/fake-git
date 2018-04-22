@@ -1,16 +1,16 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "fake/git/version"
+require "fake_git/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "fake-git"
-  spec.version       = Fake::Git::VERSION
+  spec.name          = "fake_git"
+  spec.version       = FakeGit::VERSION
   spec.authors       = ["pauloancheta"]
   spec.email         = ["paulo.ancheta@gmail.com"]
 
-  spec.summary       = %q{Fake git using ruby}
-  spec.description   = %q{Trying to replicate git using ruby}
+  spec.summary       = "Fake git using ruby"
+  spec.description   = "Trying to replicate git using ruby"
   spec.homepage      = "https://www.github.com/pauloancheta/fake-git"
   spec.license       = "MIT"
 

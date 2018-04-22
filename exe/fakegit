@@ -29,7 +29,7 @@ end.parse!
 
 cmd, _ = ARGV
 if cmd.nil? || !$OPTIONS[:stdin]
-  Fake::Git.call(ARGV)
+  FakeGit.call(ARGV)
   return
 end
 
@@ -39,7 +39,7 @@ while input = STDIN.gets
     begin
       full_cmd = [cmd, line].flatten
 
-      Fake::Git.call( full_cmd )
+      FakeGit.call( full_cmd )
     rescue Errno::EPIPE
       exit(74)
     end
