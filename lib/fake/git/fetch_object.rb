@@ -20,11 +20,7 @@ class Fake::Git::FetchObject
     end
 
     Fake::Git::Priv::Object.new(
-      type: attributes.fetch(:type),
-      content: attributes.fetch(:content),
-      index: attributes.fetch(:index),
-      file_name: attributes[:file_name],
-      path: path
+      attributes.merge(path: path)
     )
   end
 
