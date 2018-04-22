@@ -1,4 +1,5 @@
 require_relative 'fetch_object'
+require_relative 'update_ref'
 require 'digest'
 
 class Fake::Git::CommitTree
@@ -16,12 +17,7 @@ class Fake::Git::CommitTree
     )
 
     commit.write!
-
-    path = ".fakegit/refs/heads/master"
-    File.open(path, 'w') do |file|
-      file.write(commit.index)
-    end
-
+    Fake::Git::UpdateRef.new.call(commit.index)
   end
 
   class TypeError < StandardError; end
