@@ -21,16 +21,16 @@ $> echo 'hello world' | fakegit hash-object
 
 module Fake::Git
   def self.call(*args)
-    cmd, _ = args.flatten
+    cmds = args.flatten
 
-    if cmd.nil?
+    if cmds.empty?
       puts HELP
       return
     end
 
-    sub_cmd = args.flatten[1..-1].join(" ")
+    klass = cmds.first.split("-").map(&:capitalize).join
+    sub_cmd = cmds[1..-1].join(" ")
 
-    klass = cmd.split("-").map(&:capitalize).join
     const_get("#{klass}").new.call(sub_cmd)
   end
 end

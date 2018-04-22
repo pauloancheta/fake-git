@@ -2,7 +2,6 @@ require 'digest'
 require_relative 'priv/object'
 
 class Fake::Git::HashObject
-
   def call(*args)
     obj = Fake::Git::Priv::Object.new(
       type: "blob",
